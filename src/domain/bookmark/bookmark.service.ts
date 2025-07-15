@@ -26,7 +26,7 @@ export class BookMarkService{
 
     
     async readBookMarkAll(data: BookMarkReadAllReqDto) {
-        const {user_id } = data;
+        const {user_id} = data;
       
         const bookmark = await this.bookMarkRepository.findBy({ user_id });
       
@@ -46,13 +46,14 @@ export class BookMarkService{
     
     async readBookMark(data: BookMarkReadReqDto) {
         const { id, user_id } = data;
-      
-        const bookmark = await this.bookMarkRepository.findOneBy({ id, user_id });
-      
+
+        const bookmark = await this.bookMarkRepository.findOne({where : {id: id , user_id : user_id}});
+        
         if (!bookmark) {
           throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
         }
       
+
         return {
           bookmark: bookmark.bookmark,
         };

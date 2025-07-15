@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, Patch, Post, Query, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, ValidationPipe } from "@nestjs/common";
 import { BookMarkCreateReqDto } from "./dto/request/bookmark.create";
 import { BookMarkReadAllReqDto } from "./dto/request/bookmark.readall";
-import { BookMarkReadReqDto } from "./dto/request/bookmark.read";
 import { BookMarkUpdateReqDto } from "./dto/request/bookmark.update";
 import { BookMarkDeleteReqDto } from "./dto/request/bookmark.delete";
 import { BookMarkService } from './bookmark.service';
+import { BookMarkReadReqDto } from "./dto/request/bookmark.read";
 
 @Controller('bookmark')
 export class BookMarkController{
@@ -19,13 +19,13 @@ export class BookMarkController{
     }
 
 
-    @Get('/read/all')
-    async readAll(@Query() data: BookMarkReadAllReqDto){
+    @Get('/read/all')//param으로 userid를 받아라
+    async readAll(@Param() data: BookMarkReadAllReqDto){
         return this.BookMarkService.readBookMarkAll(data);
     }
 
-   @Get('/read')
-   async read(@Query() data: BookMarkReadReqDto) {
+   @Get('/read/:id/:user_id')
+   async read(@Param() data: BookMarkReadReqDto) {
         return this.BookMarkService.readBookMark(data);
   }
 
