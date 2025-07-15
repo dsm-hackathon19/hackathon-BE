@@ -19,7 +19,7 @@ export class BookMarkController{
     }
 
 
-    @Get('/read/all')//param으로 userid를 받아라
+    @Get('/read/all/:user_id')//param으로 userid를 받아라
     async readAll(@Param() data: BookMarkReadAllReqDto){
         return this.BookMarkService.readBookMarkAll(data);
     }

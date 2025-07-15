@@ -59,7 +59,7 @@ export class BookMarkService{
       }
       
     async updateBookMark(data:BookMarkUpdateReqDto){
-        const {newBookmark,id,user_id} = data;
+        const {newBookMark,id,user_id} = data;
         try{
         const bookmark = await this.bookMarkRepository.findOneBy({ id, user_id });
 
@@ -68,7 +68,7 @@ export class BookMarkService{
         }
 
         const updateData={
-            bookmark: data.newBookmark || bookmark.bookmark,
+            bookmark: data.newBookMark || bookmark.bookmark,
         }
 
         await this.bookMarkRepository.update(bookmark.id, updateData);

@@ -33,7 +33,6 @@ export class BookMarkService{
         if (!bookmark || bookmark.length === 0) {
           throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
         }
-      
         return {
             bookmarks: bookmark.map(b => ({
                 id: b.id,
@@ -52,7 +51,6 @@ export class BookMarkService{
         if (!bookmark) {
           throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
         }
-      
 
         return {
           bookmark: bookmark.bookmark,
@@ -60,7 +58,7 @@ export class BookMarkService{
       }
       
     async updateBookMark(data:BookMarkUpdateReqDto){
-        const {newBookmark,id,user_id} = data;
+        const {newBookMark,id,user_id} = data;
         try{
         const bookmark = await this.bookMarkRepository.findOneBy({ id, user_id });
 
@@ -69,11 +67,12 @@ export class BookMarkService{
         }
 
         const updateData={
-            bookmark: data.newBookmark || bookmark.bookmark,
+            bookmark: data.newBookMark || bookmark.bookmark,
         }
 
         await this.bookMarkRepository.update(bookmark.id, updateData);
 
+        return {statusCode: HttpStatus.OK };
         }catch(error){
             console.error('북마크 수정 실패:', error.message);
             throw new InternalServerErrorException('북마크 수정 중 오류가 발생했습니다.');
