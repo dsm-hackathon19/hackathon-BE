@@ -1,0 +1,19 @@
+import { DataSource } from 'typeorm';
+import { config } from 'dotenv';
+import { Bookmark } from 'src/bookmark/entities/bookmark.entities';
+
+// .env 파일 로드
+config();
+
+export const dataSource = new DataSource({
+  type: 'mysql',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT || '3306'),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.MYSQL_NAME,
+  entities: [Bookmark], 
+  synchronize: process.env.DB_SYNCHRONIZE === 'true' || true,
+  logging: process.env.DB_LOGGING === 'true' || true,
+  driver: require('mysql2')
+});
