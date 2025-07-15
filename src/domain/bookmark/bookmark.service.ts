@@ -22,12 +22,17 @@ export class BookMarkService{
             bookmark,
             user_id
         });
+        return {StatusCode:HttpStatus.CREATED}
     }
 
     
     async readBookMarkAll(data: BookMarkReadAllReqDto) {
         const {user_id} = data;
       
+        if (!user_id) {
+            throw new HttpException('User ID is required', HttpStatus.BAD_REQUEST);
+        }
+        
         const bookmark = await this.bookMarkRepository.findBy({ user_id });
       
         if (!bookmark || bookmark.length === 0) {
@@ -72,7 +77,7 @@ export class BookMarkService{
 
         await this.bookMarkRepository.update(bookmark.id, updateData);
 
-        return {statusCode: HttpStatus.OK };
+        return {statusCode: HttpStatus.OK};
         }catch(error){
             console.error('북마크 수정 실패:', error.message);
             throw new InternalServerErrorException('북마크 수정 중 오류가 발생했습니다.');
@@ -90,7 +95,7 @@ export class BookMarkService{
             }
             await this.bookMarkRepository.delete({id,user_id})
 
-            return {statusCode: HttpStatus.OK };
+            return {statusCode: HttpStatus.NO_CONTENT};
             }catch(error){
                 console.error('북마크 삭제 실패:', error.message);
                 throw new InternalServerErrorException('북마크 삭제 중 오류가 발생했습니다.');
