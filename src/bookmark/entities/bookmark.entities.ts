@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { IsUUID } from "class-validator";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('bookmark') //테이블 이름
