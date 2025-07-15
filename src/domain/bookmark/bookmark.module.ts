@@ -1,6 +1,6 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { BookMarkController } from "./bookmark.controller";
-import { BookMarkService } from "./bookmark.serviec";
+import { BookMarkService } from "./bookmark.service";
 import { Bookmark } from "./entities/bookmark.entities";
 import { Module } from '@nestjs/common';
 

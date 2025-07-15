@@ -1,15 +1,14 @@
-
-import { Result } from './../../node_modules/typeorm/node_modules/glob/dist/esm/glob.d';
 import { Body, Controller, Delete, Get, Patch, Post, Query, ValidationPipe } from "@nestjs/common";
 import { BookMarkCreateReqDto } from "./dto/request/bookmark.create";
 import { BookMarkReadAllReqDto } from "./dto/request/bookmark.readall";
 import { BookMarkReadReqDto } from "./dto/request/bookmark.read";
 import { BookMarkUpdateReqDto } from "./dto/request/bookmark.update";
 import { BookMarkDeleteReqDto } from "./dto/request/bookmark.delete";
+import { BookMarkService } from './bookmark.service';
 
 @Controller('bookmark')
 export class BookMarkController{
-    BookMarkService: any;
+  constructor(private readonly BookMarkService: BookMarkService) { }  
     
     @Post('/create')
     async create(

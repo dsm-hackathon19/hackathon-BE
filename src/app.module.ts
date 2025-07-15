@@ -1,14 +1,14 @@
 // app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BookMarkModule } from './bookmark/bookmark.module';
 import { dataSource } from './global/data.source';
+import { BookMarkModule } from './domain/bookmark/bookmark.module';
 
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      ...dataSource.options, 
+      ...dataSource.options,  //datasour
     }),
     BookMarkModule,
   ],

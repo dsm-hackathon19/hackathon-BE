@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
-import { Bookmark } from 'src/bookmark/entities/bookmark.entities';
+import { Bookmark } from 'src/domain/bookmark/entities/bookmark.entities';
+
 
 // .env 파일 로드
 config();
