@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSource } from './global/data.source';
 import { BookMarkModule } from './domain/bookmark/bookmark.module';
 import { SetUpModule } from './domain/setup/setup.module';
+import { MemoModule } from './domain/memo/memo.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { SetUpModule } from './domain/setup/setup.module';
       ...dataSource.options,  //datasource 파일 불러오기
     }),
     BookMarkModule,
-    SetUpModule
+    SetUpModule,
+    MemoModule
   ],
 })
 export class AppModule {}

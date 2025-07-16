@@ -9,5 +9,5 @@ export class BookMarkUpdateReqDto{
     user_id:string;   
 
     @IsNotEmpty()   
-    newBookMark:string;
+    new_book_mark:string;
 }

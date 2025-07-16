@@ -16,10 +16,14 @@ export class BookMarkService{
     ){}
 
     async createBookMark(data:BookMarkCreateReqDto){
-        const {bookmark,user_id} = data;
+        const {book_mark,user_id} = data;
+        
+        if(!user_id){
+            throw new HttpException('user_id NOTFOUND',HttpStatus.UNAUTHORIZED)//user_id가 없음
+        }
         
         await this.bookMarkRepository.save({ 
-            bookmark,
+            book_mark,
             user_id
         });
         return {StatusCode:HttpStatus.CREATED}
@@ -32,7 +36,7 @@ export class BookMarkService{
         if (!user_id) {
             throw new HttpException('User ID is required', HttpStatus.BAD_REQUEST);
         }
-        
+
         const bookmark = await this.bookMarkRepository.findBy({ user_id });
       
         if (!bookmark || bookmark.length === 0) {
@@ -41,13 +45,11 @@ export class BookMarkService{
         return {
             bookmarks: bookmark.map(b => ({
                 id: b.id,
-                bookmark: b.bookmark,
+                bookmark: b.book_mark,
             })),
         };
       }
 
-    
-    
     async readBookMark(data: BookMarkReadReqDto) {
         const { id, user_id } = data;
 
@@ -58,12 +60,12 @@ export class BookMarkService{
         }
 
         return {
-          bookmark: bookmark.bookmark,
+          bookmark: bookmark.book_mark,
         };
       }
       
     async updateBookMark(data:BookMarkUpdateReqDto){
-        const {newBookMark,id,user_id} = data;
+        const {new_book_mark,id,user_id} = data;
         try{
         const bookmark = await this.bookMarkRepository.findOneBy({ id, user_id });
 
@@ -72,7 +74,7 @@ export class BookMarkService{
         }
 
         const updateData={
-            bookmark: data.newBookMark || bookmark.bookmark,
+            book_mark: new_book_mark || bookmark.book_mark,
         }
 
         await this.bookMarkRepository.update(bookmark.id, updateData);
@@ -86,7 +88,6 @@ export class BookMarkService{
 
         async deleteBookMark(data:BookMarkDeleteReqDto){
             const {id,user_id} = data;
-
             try{
             const bookmark = await this.bookMarkRepository.findOneBy({id,user_id})
             

@@ -1,4 +1,3 @@
-import { IsUUID } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -8,7 +7,7 @@ export class Bookmark{
     id:string;
 
     @Column()
-    bookmark:string;
+    book_mark:string;
 
     @Column()
     user_id:string;
