@@ -16,6 +16,14 @@ export class MemoController{
         const result = await this.MemoService.createMemo(data);
         return result
     }
+
+    @Get('/read/:user_id') 
+    async readMemoAll(@Param() data: MemoReadRequestDto) {
+        console.log(data);
+        const result = await this.MemoService.readMemo(data);
+        return result;
+    }
+
     @Get('/read/:user_id/:id') 
     async readMemo(@Param() data: MemoReadRequestDto) {
         console.log(data);
