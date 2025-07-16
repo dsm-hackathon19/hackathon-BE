@@ -6,7 +6,8 @@ import { MemoUpdateRequestDto } from "./dto/req.dto/memo.update.dto";
 import { Memo } from "./entities/memo.entities";
 import { MemoDeleteReqDto } from "./dto/req.dto/memo.delete.dto";
 import { MemoReadRequestDto } from "./dto/req.dto/memo.read.dto";
-import { MemoReadAllRequestDto } from "./dto/req.dto/memo.read.All.dto";
+import { MemoReadAllRequestDto } from "./dto/req.dto/memo.read.all.dto";
+
 
 @Injectable()
 export class MemoService{
