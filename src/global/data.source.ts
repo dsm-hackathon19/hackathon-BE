@@ -12,9 +12,8 @@ export const dataSource = new DataSource({
   port: parseInt(process.env.DB_PORT || '3306'),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  database: process.env.MYSQL_NAME,
+  database: process.env.DB_NAME,
   entities: [Bookmark], 
   synchronize: process.env.DB_SYNCHRONIZE === 'true' || true,
   logging: process.env.DB_LOGGING === 'true' || true,
-  driver: require('mysql2')
 });
