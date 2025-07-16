@@ -3,14 +3,16 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSource } from './global/data.source';
 import { BookMarkModule } from './domain/bookmark/bookmark.module';
+import { SetUpModule } from './domain/setup/setup.module';
 
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      ...dataSource.options,  //datasour
+      ...dataSource.options,  //datasource 파일 불러오기
     }),
     BookMarkModule,
+    SetUpModule
   ],
 })
 export class AppModule {}
