@@ -23,11 +23,11 @@ constructor(
 async createMemo(data:MemoCreateRequestDto){
     const {memo,person,user_id} = data;
 
-    const user = await this.userRepository.findOne({where :{user_id:user_id}})
+    // const user = await this.userRepository.findOne({where :{user_id:user_id}})
    
-    if(!user){
-        throw new HttpException('user_id NOTFOUND',HttpStatus.NOT_FOUND)
-    }
+    // if(!user){
+    //     throw new HttpException('user_id NOTFOUND',HttpStatus.NOT_FOUND)
+    // }
     
     await this.memoRepository.save({
         memo,  
