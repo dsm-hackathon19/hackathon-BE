@@ -22,7 +22,7 @@ export class MemoController{
         console.log(data);
         const result = await this.MemoService.readMemo(data);
         return result;
-    }
+    }r
 
     @Get('/read/:user_id/:id') 
     async readMemo(@Param() data: MemoReadRequestDto) {

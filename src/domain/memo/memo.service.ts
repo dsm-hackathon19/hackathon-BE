@@ -7,20 +7,25 @@ import { Memo } from "./entities/memo.entities";
 import { MemoDeleteReqDto } from "./dto/req.dto/memo.delete.dto";
 import { MemoReadRequestDto } from "./dto/req.dto/memo.read.dto";
 import { MemoReadAllRequestDto } from "./dto/req.dto/memo.read.all.dto";
+import { User } from "../user/entities/user.entitiy";
 
 
 @Injectable()
 export class MemoService{
 constructor(
     @InjectRepository(Memo)
-    private memoRepository:Repository<Memo>
+    private memoRepository:Repository<Memo>,
 
+    @InjectRepository(User)
+    private userRepository:Repository<User>
 ){}
 
 async createMemo(data:MemoCreateRequestDto){
     const {memo,person,user_id} = data;
-    
-    if(!user_id){
+
+    const user = await this.userRepository.findOne({where :{user_id:user_id}})
+   
+    if(!user){
         throw new HttpException('user_id NOTFOUND',HttpStatus.NOT_FOUND)
     }
     
@@ -36,7 +41,7 @@ async createMemo(data:MemoCreateRequestDto){
 async readMemoAll(data: MemoReadAllRequestDto) {
     const { user_id } = data;
 
-    console.log(user_id)
+
     const memo = await this.memoRepository.findOne({where : {user_id : user_id}});
     if (!memo) {
       throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
